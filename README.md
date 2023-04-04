@@ -1,2 +1,2 @@
 # Spider-Payload
-Bypass SIEM Listener &amp; Payload Generator
+Bypass SIEM Listener & Payload Generator
