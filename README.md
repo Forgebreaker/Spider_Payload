@@ -7,7 +7,7 @@
 ![image](https://user-images.githubusercontent.com/112708857/229701475-22b66b24-b246-4f0e-ac4e-306d65e6cffc.png)
 
 # Mindset
-This tool generates a listener and a payload in Python (Using HTTP protocol). The listener waits for connections from the payload, receives commands, encrypts them, sends them to the payload, and then decrypts the output and prints it. The payload waits for commands from the listener, decrypts them, executes them, encrypts the output, and sends it back to the listener.
+This tool generates a listener and a payload in Python (using HTTP protocol). The listener waits for connections from the payload, receives commands, encrypts them, sends them to the payload, and then decrypts the output and prints it. The payload waits for commands from the listener, decrypts them, executes them, encrypts the output, and sends it back to the listener.
 
 The code uses the pyfiglet module to generate ASCII art and the cryptocode module to encrypt and decrypt the commands and output. The code also uses the socket module to obtain the IP address of the host running the listener.
 
