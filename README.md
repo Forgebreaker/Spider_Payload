@@ -13,7 +13,7 @@ The tool uses  the cryptocode module to encrypt and decrypt the commands and out
 
 To generate the payload and listener, the tool prompts the user to enter the IP address and port number for the listener then generates a random encryption key and uses it to encrypt and decrypt the commands and output.
 
-The listener is written to a file named Listener_<random>.py, and the payload is written to a file named Payload_<random>.pyw.
+The listener is written to a file named Listener_{random}.py, and the payload is written to a file named Payload_{random}.py.
 
 Optionally, the tool can automatically start the listener after generating the payload and listener.
 
